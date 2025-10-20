@@ -27,7 +27,7 @@ nutricao = pd.DataFrame(columns=["data", "hora", "refeição", "calorias", "glic
 # ==========================================
 
 def registrar_atividade(atividade, duração_min, intensidade, observações=""):
-    global atividades
+    try:    global atividades
     agora = dt.datetime.now()
     novo = pd.DataFrame([{
         "data": agora.date(),
@@ -38,10 +38,10 @@ def registrar_atividade(atividade, duração_min, intensidade, observações="")
         "observações": observações
     }])
     atividades = pd.concat([atividades, novo], ignore_index=True)
-    print("✅ Atividade registrada com sucesso!")
-
+        print("✅ Atividade registrada com sucesso!")
+    except Exception as e:        print(f'Erro ao registrar: {e}')
 def registrar_medicamento(medicamento, dose, observações=""):
-    global medicamentos
+    try:    global medicamentos
     agora = dt.datetime.now()
     novo = pd.DataFrame([{
         "data": agora.date(),
@@ -54,7 +54,7 @@ def registrar_medicamento(medicamento, dose, observações=""):
     print("💊 Registro de medicamento adicionado!")
 
 def registrar_humor(nível_humor, observações=""):
-    global humor
+    try:    global humor
     agora = dt.datetime.now()
     novo = pd.DataFrame([{
         "data": agora.date(),
@@ -66,7 +66,7 @@ def registrar_humor(nível_humor, observações=""):
     print("🙂 Registro de humor adicionado!")
 
 def registrar_observacao(anotação):
-    global observacoes
+    try:    global observacoes
     agora = dt.datetime.now()
     novo = pd.DataFrame([{
         "data": agora.date(),
@@ -74,10 +74,10 @@ def registrar_observacao(anotação):
         "anotação": anotação
     }])
     observacoes = pd.concat([observacoes, novo], ignore_index=True)
-    print("📝 Observação registrada!")
-
+        print("📝 Observação registrada!")
+    except Exception as e:        print(f'Erro ao registrar: {e}')
 def registrar_refeicao(refeição, calorias, glicemia=None, insulina=None, observações=""):
-    global nutricao
+    try:    global nutricao
     agora = dt.datetime.now()
     novo = pd.DataFrame([{
         "data": agora.date(),
@@ -89,8 +89,8 @@ def registrar_refeicao(refeição, calorias, glicemia=None, insulina=None, obser
         "observações": observações
     }])
     nutricao = pd.concat([nutricao, novo], ignore_index=True)
-    print("🍽️ Refeição registrada!")
-
+        print("🍽️ Refeição registrada!")
+    except Exception as e:        print(f'Erro ao registrar: {e}')
 # ==========================================
 # 4️⃣ Funções para importar dados de planilhas CSV
 # ==========================================
@@ -216,8 +216,8 @@ def form_atividade():
     def salvar(b):
         registrar_atividade(atividade.value, duracao.value, intensidade.value, obs.value)
         clear_output()
-        print("✅ Atividade registrada!\n")
-        painel_registro()
+            print("✅ Atividade registrada!\n")
+    except Exception as e:        print(f'Erro ao registrar: {e}')        painel_registro()
 
     display(atividade, duracao, intensidade, obs, btn)
     btn.on_click(salvar)
@@ -275,8 +275,8 @@ def form_refeicao():
     def salvar(b):
         registrar_refeicao(refeicao.value, calorias.value, glicemia.value, insulina.value, obs.value)
         clear_output()
-        print("🍽️ Refeição registrada!\n")
-        painel_registro()
+            print("🍽️ Refeição registrada!\n")
+    except Exception as e:        print(f'Erro ao registrar: {e}')        painel_registro()
 
     display(refeicao, calorias, glicemia, insulina, obs, btn)
     btn.on_click(salvar)
@@ -328,7 +328,6 @@ def painel_principal():
 
 painel_principal()
 
-pip install streamlit pandas matplotlib
 
 # ==========================================
 # 🩺 ACOMPANHAMENTO DE SAÚDE - APP STREAMLIT
@@ -481,4 +480,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
