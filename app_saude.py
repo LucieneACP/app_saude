@@ -27,70 +27,85 @@ nutricao = pd.DataFrame(columns=["data", "hora", "refeição", "calorias", "glic
 # ==========================================
 
 def registrar_atividade(atividade, duração_min, intensidade, observações=""):
-    try:    global atividades
-    agora = dt.datetime.now()
-    novo = pd.DataFrame([{
-        "data": agora.date(),
-        "hora": agora.strftime("%H:%M"),
-        "atividade": atividade,
-        "duração_min": duração_min,
-        "intensidade": intensidade,
-        "observações": observações
-    }])
-    atividades = pd.concat([atividades, novo], ignore_index=True)
-        print("✅ Atividade registrada com sucesso!")
-    except Exception as e:        print(f'Erro ao registrar: {e}')
+     try:
+     global atividades
+     agora = dt.datetime.now()
+     novo = pd.DataFrame([{
+     "data": agora.date(),
+     "hora": agora.strftime("%H:%M"),
+     "atividade": atividade,
+     "duração_min": duração_min,
+     "intensidade": intensidade,
+     "observações": observações
+     }])
+     atividades = pd.concat([atividades, novo], ignore_index=True)
+     print("✅ Atividade registrada com sucesso!")
+     except Exception as e:
+         print(f'Erro: {e}')
+
 def registrar_medicamento(medicamento, dose, observações=""):
-    try:    global medicamentos
-    agora = dt.datetime.now()
-    novo = pd.DataFrame([{
-        "data": agora.date(),
-        "hora": agora.strftime("%H:%M"),
-        "medicamento": medicamento,
-        "dose": dose,
-        "observações": observações
-    }])
-    medicamentos = pd.concat([medicamentos, novo], ignore_index=True)
-    print("💊 Registro de medicamento adicionado!")
+     try:
+     global medicamentos
+     agora = dt.datetime.now()
+     novo = pd.DataFrame([{
+     "data": agora.date(),
+     "hora": agora.strftime("%H:%M"),
+     "medicamento": medicamento,
+     "dose": dose,
+     "observações": observações
+     }])
+     medicamentos = pd.concat([medicamentos, novo], ignore_index=True)
+     print("💊 Registro de medicamento adicionado!")
+     except Exception as e:
+         print(f'Erro: {e}')
 
 def registrar_humor(nível_humor, observações=""):
-    try:    global humor
-    agora = dt.datetime.now()
-    novo = pd.DataFrame([{
-        "data": agora.date(),
-        "hora": agora.strftime("%H:%M"),
-        "nível_humor": nível_humor,
-        "observações": observações
-    }])
-    humor = pd.concat([humor, novo], ignore_index=True)
-    print("🙂 Registro de humor adicionado!")
+     try:
+     global humor
+     agora = dt.datetime.now()
+     novo = pd.DataFrame([{
+     "data": agora.date(),
+     "hora": agora.strftime("%H:%M"),
+     "nível_humor": nível_humor,
+     "observações": observações
+     }])
+     humor = pd.concat([humor, novo], ignore_index=True)
+     print("🙂 Registro de humor adicionado!")
+     except Exception as e:
+         print(f'Erro: {e}')
 
 def registrar_observacao(anotação):
-    try:    global observacoes
-    agora = dt.datetime.now()
-    novo = pd.DataFrame([{
-        "data": agora.date(),
-        "hora": agora.strftime("%H:%M"),
-        "anotação": anotação
-    }])
-    observacoes = pd.concat([observacoes, novo], ignore_index=True)
-        print("📝 Observação registrada!")
-    except Exception as e:        print(f'Erro ao registrar: {e}')
+     try:
+     global observacoes
+     agora = dt.datetime.now()
+     novo = pd.DataFrame([{
+     "data": agora.date(),
+     "hora": agora.strftime("%H:%M"),
+     "anotação": anotação
+     }])
+     observacoes = pd.concat([observacoes, novo], ignore_index=True)
+     print("📝 Observação registrada!")
+     except Exception as e:
+         print(f'Erro: {e}')
+
 def registrar_refeicao(refeição, calorias, glicemia=None, insulina=None, observações=""):
-    try:    global nutricao
-    agora = dt.datetime.now()
-    novo = pd.DataFrame([{
-        "data": agora.date(),
-        "hora": agora.strftime("%H:%M"),
-        "refeição": refeição,
-        "calorias": calorias,
-        "glicemia": glicemia,
-        "insulina": insulina,
-        "observações": observações
-    }])
-    nutricao = pd.concat([nutricao, novo], ignore_index=True)
-        print("🍽️ Refeição registrada!")
-    except Exception as e:        print(f'Erro ao registrar: {e}')
+     try:
+     global nutricao
+     agora = dt.datetime.now()
+     novo = pd.DataFrame([{
+     "data": agora.date(),
+     "hora": agora.strftime("%H:%M"),
+     "refeição": refeição,
+     "calorias": calorias,
+     "glicemia": glicemia,
+     "insulina": insulina,
+     "observações": observações
+     }])
+     nutricao = pd.concat([nutricao, novo], ignore_index=True)
+     print("🍽️ Refeição registrada!")
+     except Exception as e:
+         print(f'Erro: {e}')
+
 # ==========================================
 # 4️⃣ Funções para importar dados de planilhas CSV
 # ==========================================
@@ -216,8 +231,8 @@ def form_atividade():
     def salvar(b):
         registrar_atividade(atividade.value, duracao.value, intensidade.value, obs.value)
         clear_output()
-            print("✅ Atividade registrada!\n")
-    except Exception as e:        print(f'Erro ao registrar: {e}')        painel_registro()
+        print("✅ Atividade registrada!\n")
+        painel_registro()
 
     display(atividade, duracao, intensidade, obs, btn)
     btn.on_click(salvar)
@@ -275,8 +290,8 @@ def form_refeicao():
     def salvar(b):
         registrar_refeicao(refeicao.value, calorias.value, glicemia.value, insulina.value, obs.value)
         clear_output()
-            print("🍽️ Refeição registrada!\n")
-    except Exception as e:        print(f'Erro ao registrar: {e}')        painel_registro()
+        print("🍽️ Refeição registrada!\n")
+        painel_registro()
 
     display(refeicao, calorias, glicemia, insulina, obs, btn)
     btn.on_click(salvar)
